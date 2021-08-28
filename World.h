@@ -5,10 +5,14 @@
 #ifndef RAYCASTINGENGINE_WORLD_H
 #define RAYCASTINGENGINE_WORLD_H
 
+#include "LinearAlgebra.h"
+
 #define MAP_WIDTH 24
 #define MAP_HEIGHT 24
 
-int worldMap[MAP_WIDTH][MAP_HEIGHT];
-
+Vector pos;
+Vector dir;
+Vector plane;
+int get_world_case(int x, int y);
 
 #endif //RAYCASTINGENGINE_WORLD_H

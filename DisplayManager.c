@@ -5,8 +5,6 @@
 #include <SDL2/SDL.h>
 #include "DisplayManager.h"
 
-int FULLSCREEN = 0;
-
 SDL_Window * window;
 SDL_Renderer * renderer;
 SDL_Texture * texture;
@@ -45,4 +43,12 @@ void setPixel(int x, int y, ColorRGB color){
 
 void setTitle(char * title){
     SDL_SetWindowTitle(window,title);
+}
+
+void clearScreen(){
+    for(int x = 0; x < WIDTH; x++){
+        for(int y = 0; y < HEIGHT; y++){
+            setPixel(x,y,BLACK);
+        }
+    }
 }

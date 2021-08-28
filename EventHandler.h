@@ -7,9 +7,11 @@
 
 int quit;
 void checkEvents();
-int is_up_pressed;
-int is_down_pressed;
-int is_left_pressed;
-int is_right_pressed;
+void doMovements(double t);
+
+int up_pressed;
+int down_pressed;
+int left_pressed;
+int right_pressed;
 
 #endif //RAYCASTINGENGINE_EVENTHANDLER_H

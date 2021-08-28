@@ -2,15 +2,17 @@
 // Created by mine- on 28-08-21.
 //
 #include <SDL2/SDL.h>
+#include <math.h>
 #include "EventHandler.h"
+#include "World.h"
 
 SDL_Event event;
 int quit = 0;
 
-int is_up_pressed = 0;
-int is_down_pressed = 0;
-int is_left_pressed = 0;
-int is_right_pressed = 0;
+int up_pressed = 0;
+int down_pressed = 0;
+int left_pressed = 0;
+int right_pressed = 0;
 
 void keyDown(){
     switch( event.key.keysym.sym){
@@ -18,16 +20,16 @@ void keyDown(){
             quit=1;
             break;
         case SDLK_UP:
-            is_up_pressed = 1;
+            up_pressed = 1;
             break;
         case SDLK_DOWN:
-            is_down_pressed = 1;
+            down_pressed = 1;
             break;
         case SDLK_LEFT:
-            is_left_pressed = 1;
+            left_pressed = 1;
             break;
         case SDLK_RIGHT:
-            is_right_pressed = 1;
+            right_pressed = 1;
             break;
     }
 }
@@ -35,20 +37,19 @@ void keyDown(){
 void keyUp(){
     switch( event.key.keysym.sym){
         case SDLK_UP:
-            is_up_pressed = 0;
+            up_pressed = 0;
             break;
         case SDLK_DOWN:
-            is_down_pressed = 0;
+            down_pressed = 0;
             break;
         case SDLK_LEFT:
-            is_left_pressed = 0;
+            left_pressed = 0;
             break;
         case SDLK_RIGHT:
-            is_right_pressed = 0;
+            right_pressed = 0;
             break;
     }
 }
-
 
 void checkEvents(){
     if ( SDL_PollEvent( &event ) ) {

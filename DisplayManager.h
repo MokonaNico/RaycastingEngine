@@ -9,12 +9,15 @@
 
 #define WIDTH 480
 #define HEIGHT 270
+#define FULLSCREEN 1
 
 void createDisplay();
 void updateDisplay();
 void closeDisplay();
 void setPixel(int x, int y, ColorRGB color);
 void setTitle(char title[]);
+void clearScreen();
+
 
 #endif //RAYCASTINGENGINE_DISPLAYMANAGER_H
 
