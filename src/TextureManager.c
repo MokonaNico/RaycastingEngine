@@ -7,29 +7,24 @@
 #include <SDL2/SDL_image.h>
 #include <stdio.h>
 
-SDL_Surface * textures[5];
+#define nbr_texture 5
+
+char arr[nbr_texture][128] = {
+        "res/images/stone.png",
+        "res/images/stone2.png",
+        "res/images/wood.png",
+        "res/images/blue.png",
+        "res/images/flag.png"
+};
+
+SDL_Surface * textures[nbr_texture];
 
 void load_textures(){
-
-    textures[0] = IMG_Load("res/images/stone.png");
-    if(!textures[0]) {
-        printf("IMG_Load: %s\n", IMG_GetError());
-    }
-    textures[1] = IMG_Load("res/images/stone2.png");
-    if(!textures[1]) {
-        printf("IMG_Load: %s\n", IMG_GetError());
-    }
-    textures[2] = IMG_Load("res/images/wood.png");
-    if(!textures[2]) {
-        printf("IMG_Load: %s\n", IMG_GetError());
-    }
-    textures[3] = IMG_Load("res/images/blue.png");
-    if(!textures[3]) {
-        printf("IMG_Load: %s\n", IMG_GetError());
-    }
-    textures[4] = IMG_Load("res/images/flag.png");
-    if(!textures[4]) {
-        printf("IMG_Load: %s\n", IMG_GetError());
+    for(int i = 0; i < nbr_texture; i++){
+        textures[i] = IMG_Load(arr[i]);
+        if(!textures[i]) {
+            printf("IMG_Load: %s\n", IMG_GetError());
+        }
     }
 }
 
