@@ -3,6 +3,7 @@
 #include "DisplayManager.h"
 #include "EventHandler.h"
 #include "Raycasting.h"
+#include "TextureManager.h"
 
 int main(int argc, char* argv[]) {
 
@@ -11,6 +12,7 @@ int main(int argc, char* argv[]) {
     double oldTime = 0;
 
     createDisplay();
+    load_textures();
 
     while (!quit){
 

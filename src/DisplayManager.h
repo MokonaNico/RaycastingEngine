@@ -7,8 +7,8 @@
 
 #include "Color.h"
 
-#define WIDTH 480
-#define HEIGHT 270
+#define WIDTH 480 //640
+#define HEIGHT 270 //480
 #define FULLSCREEN 1
 
 void createDisplay();
