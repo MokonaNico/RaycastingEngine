@@ -13,5 +13,7 @@ int up_pressed;
 int down_pressed;
 int left_pressed;
 int right_pressed;
+int strafe_left_pressed;
+int strafe_right_pressed;
 
 #endif //RAYCASTINGENGINE_EVENTHANDLER_H

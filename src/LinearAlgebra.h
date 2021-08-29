@@ -11,4 +11,5 @@ typedef struct {
 } Vector;
 
 Vector rotate(Vector vector, double angle);
+Vector inverse(Vector vector);
 #endif //RAYCASTINGENGINE_LINEARALGEBRA_H
