@@ -6,8 +6,54 @@
 #include "Raycasting.h"
 #include "DisplayManager.h"
 #include "World.h"
+#include "TextureManager.h"
 
-void compute_raycast(){
+#define ceiling_texture 0
+#define floor_texture 1
+
+void floor_ceiling_casting(){
+    for(int y = 0; y < HEIGHT; y++)
+    {
+        double rayDirX0 = dir.x - plane.x;
+        double rayDirY0 = dir.y - plane.y;
+        double rayDirX1 = dir.x + plane.x;
+        double rayDirY1 = dir.y + plane.y;
+
+        int p = y - HEIGHT / 2;
+        double posZ = 0.5 * HEIGHT;
+
+        double rowDistance = posZ / (double) p;
+
+        double floorStepX = rowDistance * (rayDirX1 - rayDirX0) / WIDTH;
+        double floorStepY = rowDistance * (rayDirY1 - rayDirY0) / WIDTH;
+        double floorX = pos.x + rowDistance * rayDirX0;
+        double floorY = pos.y + rowDistance * rayDirY0;
+
+        for(int x = 0; x < WIDTH; ++x)
+        {
+            int cellX = (int)(floorX);
+            int cellY = (int)(floorY);
+
+            int tx = (int)(TEX_SIZE * (floorX - cellX)) & (TEX_SIZE - 1);
+            int ty = (int)(TEX_SIZE * (floorY - cellY)) & (TEX_SIZE - 1);
+
+            floorX += floorStepX;
+            floorY += floorStepY;
+
+            ColorRGB color;
+
+            // floor
+            color = get_pixel(floor_texture, tx, ty);
+            setPixel(x,y,color);
+
+            //ceiling
+            color = get_pixel(ceiling_texture, tx, ty);
+            setPixel(x, HEIGHT-y-1, color);
+        }
+    }
+}
+
+void wall_casting(){
     for(int x = 0; x < WIDTH; x++){
         double cameraX = 2 * x / (double)WIDTH - 1; //x-coordinate in camera space
         double rayDirX = dir.x + plane.x * cameraX;
@@ -88,21 +134,28 @@ void compute_raycast(){
         int drawEnd = lineHeight / 2 + HEIGHT / 2;
         if(drawEnd >= HEIGHT)drawEnd = HEIGHT - 1;
 
-        ColorRGB color;
-        switch(get_world_case(mapX,mapY))
+        int texNum = get_world_case(mapX,mapY) - 1;
+
+        double wallX; //where exactly the wall was hit
+        if (side == 0) wallX = pos.y + perpWallDist * rayDirY;
+        else           wallX = pos.x + perpWallDist * rayDirX;
+        wallX -= floor((wallX));
+
+        int texX = (int) (wallX * (double) TEX_SIZE);
+        if(side == 0 && rayDirX > 0) texX = TEX_SIZE - texX - 1;
+        if(side == 1 && rayDirY < 0) texX = TEX_SIZE - texX - 1;
+
+        double step = 1.0 * TEX_SIZE / lineHeight;
+        double texPos = (drawStart - HEIGHT / 2.0 + lineHeight / 2.0) * step;
+        for(int y = drawStart; y<drawEnd; y++)
         {
-            case 1:  color = RED;  break; //red
-            case 2:  color = GREEN;  break; //green
-            case 3:  color = BLUE;   break; //blue
-            case 4:  color = WHITE;  break; //white
-            default: color = YELLOW; break; //yellow
-        }
+            // Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
+            int texY = (int)texPos & (TEX_SIZE - 1);
+            texPos += step;
 
-        if (side == 1) {
-            color = divide(color);
-        }
-
-        for(int y = drawStart; y < drawEnd; y++){
+            ColorRGB color = get_pixel(texNum, texX, texY);
+            //make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
+            if(side == 1) color = divide(color);
             setPixel(x,y,color);
         }
     }

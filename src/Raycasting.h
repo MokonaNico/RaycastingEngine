@@ -6,6 +6,6 @@
 #define RAYCASTINGENGINE_RAYCASTING_H
 
 #include "LinearAlgebra.h"
-
-void compute_raycast();
+void floor_ceiling_casting();
+void wall_casting();
 #endif //RAYCASTINGENGINE_RAYCASTING_H

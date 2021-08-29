@@ -15,7 +15,7 @@ void createDisplay(){
     int flags = 0;
     if(FULLSCREEN) flags = SDL_WINDOW_FULLSCREEN_DESKTOP;
     window = SDL_CreateWindow("Raycasting3D", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, flags);
-    renderer = SDL_CreateRenderer(window, -1,SDL_RENDERER_PRESENTVSYNC);
+    renderer = SDL_CreateRenderer(window, -1,SDL_RENDERER_ACCELERATED);
     texture = SDL_CreateTexture(renderer,SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, WIDTH, HEIGHT);
 
     pixels = (uint32_t*) malloc(WIDTH * HEIGHT * sizeof(uint32_t));
