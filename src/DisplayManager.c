@@ -41,10 +41,6 @@ void setPixel(int x, int y, ColorRGB color){
     pixels[y*WIDTH + x] = SDL_MapRGBA(SDL_AllocFormat(SDL_PIXELFORMAT_RGBA8888), 0,color.b,color.g,color.r);
 }
 
-void setTitle(char * title){
-    SDL_SetWindowTitle(window,title);
-}
-
 void clearScreen(){
     for(int x = 0; x < WIDTH; x++){
         for(int y = 0; y < HEIGHT; y++){

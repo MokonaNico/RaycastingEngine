@@ -3,6 +3,7 @@
 //
 
 #include "Color.h"
+
 ColorRGB RED = {255,0,0};
 ColorRGB GREEN = {255,0,0};
 ColorRGB BLUE = {0,0,255};

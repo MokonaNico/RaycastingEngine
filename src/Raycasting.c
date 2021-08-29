@@ -55,31 +55,26 @@ void floor_ceiling_casting(){
 
 void wall_casting(){
     for(int x = 0; x < WIDTH; x++){
-        double cameraX = 2 * x / (double)WIDTH - 1; //x-coordinate in camera space
+        double cameraX = 2 * x / (double)WIDTH - 1;
         double rayDirX = dir.x + plane.x * cameraX;
         double rayDirY = dir.y + plane.y * cameraX;
 
-        //which box of the map we're in
         int mapX = (int) pos.x;
         int mapY = (int) pos.y;
 
-        //length of ray from current position to next x or y-side
         double sideDistX;
         double sideDistY;
 
-        //length of ray from one x or y-side to next x or y-side
         double deltaDistX = fabs(1.0f / rayDirX);
         double deltaDistY = fabs(1.0f / rayDirY);
         double perpWallDist;
 
-        //what direction to step in x or y-direction (either +1 or -1)
         int stepX;
         int stepY;
 
-        int hit = 0; //was there a wall hit?
-        int side; //was a NS or a EW wall hit?
+        int hit = 0;
+        int side;
 
-        //calculate step and initial sideDist
         if (rayDirX < 0)
         {
             stepX = -1;
@@ -104,7 +99,6 @@ void wall_casting(){
         //perform DDA
         while (hit == 0)
         {
-            //jump to next map square, OR in x-direction, OR in y-direction
             if (sideDistX < sideDistY)
             {
                 sideDistX += deltaDistX;
@@ -117,18 +111,14 @@ void wall_casting(){
                 mapY += stepY;
                 side = 1;
             }
-            //Check if ray has hit a wall
             if (get_world_case(mapX,mapY) > 0) hit = 1;
         }
 
-        //Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
         if (side == 0) perpWallDist = (mapX - pos.x + (1.0 - stepX) / 2) / rayDirX;
         else           perpWallDist = (mapY - pos.y + (1.0 - stepY) / 2) / rayDirY;
 
-        //Calculate height of line to draw on screen
         int lineHeight = (int) ((HEIGHT / perpWallDist));
 
-        //calculate lowest and highest pixel to fill in current stripe
         int drawStart = -lineHeight / 2 + HEIGHT / 2;
         if(drawStart < 0)drawStart = 0;
         int drawEnd = lineHeight / 2 + HEIGHT / 2;
@@ -136,7 +126,7 @@ void wall_casting(){
 
         int texNum = get_world_case(mapX,mapY) - 1;
 
-        double wallX; //where exactly the wall was hit
+        double wallX;
         if (side == 0) wallX = pos.y + perpWallDist * rayDirY;
         else           wallX = pos.x + perpWallDist * rayDirX;
         wallX -= floor((wallX));
@@ -149,12 +139,9 @@ void wall_casting(){
         double texPos = (drawStart - HEIGHT / 2.0 + lineHeight / 2.0) * step;
         for(int y = drawStart; y<drawEnd; y++)
         {
-            // Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
             int texY = (int)texPos & (TEX_SIZE - 1);
             texPos += step;
-
             ColorRGB color = get_pixel(texNum, texX, texY);
-            //make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
             if(side == 1) color = divide(color);
             setPixel(x,y,color);
         }

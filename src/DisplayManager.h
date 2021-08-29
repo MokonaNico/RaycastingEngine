@@ -15,7 +15,6 @@ void createDisplay();
 void updateDisplay();
 void closeDisplay();
 void setPixel(int x, int y, ColorRGB color);
-void setTitle(char title[]);
 void clearScreen();
 
 

@@ -2,9 +2,7 @@
 // Created by mine- on 28-08-21.
 //
 #include <SDL2/SDL.h>
-#include <math.h>
 #include "EventHandler.h"
-#include "World.h"
 
 #define up_button SDLK_z
 #define down_button SDLK_s
