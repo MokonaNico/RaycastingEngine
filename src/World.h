@@ -7,12 +7,10 @@
 
 #include "LinearAlgebra.h"
 
-#define MAP_WIDTH 24
-#define MAP_HEIGHT 24
-
 Vector pos;
 Vector dir;
 Vector plane;
 int get_world_case(int x, int y);
+void load_world(char * file, int w, int h);
 
 #endif //RAYCASTINGENGINE_WORLD_H

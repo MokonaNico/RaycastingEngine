@@ -3,6 +3,7 @@
 #include "EventHandler.h"
 #include "Raycasting.h"
 #include "TextureManager.h"
+#include "World.h"
 
 int main(int argc, char* argv[]) {
     double time = 0;
@@ -10,6 +11,7 @@ int main(int argc, char* argv[]) {
 
     createDisplay();
     load_textures();
+    load_world("res/maps/map0.map",20,20);
 
     while (!quit){
         oldTime = time;
