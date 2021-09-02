@@ -17,7 +17,7 @@ int worldHeight;
 double movementSpeed = 5.0;
 double rotationSpeed = 3.0;
 
-Vector pos = {2,2};
+Vector pos = {1.5,1.5};
 Vector dir = {-1,0};
 Vector plane = {0,0.66};
 
@@ -38,13 +38,6 @@ void load_world(char * file, int w, int h){
                 worldMap[x + y * w] = c - 48;
             }
         }
-    }
-
-    for(int y = 0; y < 6; y++){
-        for(int x = 0; x < 6; x++){
-            printf("%d", get_world_case(x, y));
-        }
-        printf("\n");
     }
 
     fclose(in_file);

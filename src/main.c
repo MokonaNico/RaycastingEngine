@@ -1,4 +1,6 @@
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_net.h>
+#include <SDL2/SDL_ttf.h>
 #include "DisplayManager.h"
 #include "EventHandler.h"
 #include "Raycasting.h"
@@ -6,6 +8,8 @@
 #include "World.h"
 
 int main(int argc, char* argv[]) {
+    int state = 1;
+
     double time = 0;
     double oldTime = 0;
 
@@ -19,11 +23,14 @@ int main(int argc, char* argv[]) {
         double frameTime = (time - oldTime) / 1000.0;
 
         checkEvents();
-        doMovements(frameTime);
+        if(state == 0){
 
-        clearScreen();
-        floor_ceiling_casting();
-        wall_casting();
+        } else {
+            doMovements(frameTime);
+            clearScreen();
+            floor_ceiling_casting();
+            wall_casting();
+        }
         updateDisplay();
     }
     closeDisplay();
