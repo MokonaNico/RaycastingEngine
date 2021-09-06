@@ -6,17 +6,28 @@
 #define RAYCASTINGENGINE_DISPLAYMANAGER_H
 
 #include "Color.h"
+#include <SDL2/SDL.h>
 
 #define WIDTH 480 //640
 #define HEIGHT 270 //480
-#define FULLSCREEN 1
+#define MAX_RENDER_OBJ 32
 
-void createDisplay();
+typedef struct {
+    SDL_Surface * surface;
+    SDL_Texture * texture;
+    SDL_Rect * rect;
+    int isDisplayed;
+} RenderObject;
+
+void createDisplay(char * title, int fullScreen);
 void updateDisplay();
 void closeDisplay();
 void setPixel(int x, int y, ColorRGB color);
-void clearScreen();
-
+void clearRaycastScreen();
+void initRaycastTexture();
+void modifyRenderObject(int index, int x, int y, int w, int h, int isDisplayed);
+int createRenderObjectFromImage(char * file);
+void getScreenResolution(int * x, int * y);
 
 #endif //RAYCASTINGENGINE_DISPLAYMANAGER_H
 

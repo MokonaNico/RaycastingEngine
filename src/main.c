@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <stdio.h>
 #include "DisplayManager.h"
 #include "EventHandler.h"
 #include "Raycasting.h"
@@ -8,12 +9,12 @@
 
 
 int main(int argc, char* argv[]) {
-    int state = 0;
 
     double time = 0;
     double oldTime = 0;
 
-    createDisplay();
+    createDisplay("Raycasting 3D", 1);
+
     load_textures();
     load_world("res/maps/map0.map",20,20);
     startFont();
@@ -24,15 +25,8 @@ int main(int argc, char* argv[]) {
         double frameTime = (time - oldTime) / 1000.0;
 
         checkEvents();
-        if(state == 0){
-            updateDisplay(1);
-        } else {
-            doMovements(frameTime);
-            floor_ceiling_casting();
-            wall_casting();
-            updateDisplay(0);
-        }
-
+        doMovements(frameTime);
+        updateDisplay();
     }
 
     closeDisplay();
