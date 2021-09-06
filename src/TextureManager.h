@@ -8,8 +8,9 @@
 #include "Color.h"
 
 #define TEX_SIZE 64
+#define MAX_TEXTURE 32
 
-void load_textures();
+int load_textures(char * file);
 ColorRGB get_pixel(int texture_number, int x, int y);
 
 #endif //RAYCASTINGENGINE_TEXTUREMANAGER_H

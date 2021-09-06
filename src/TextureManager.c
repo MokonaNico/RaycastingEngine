@@ -7,25 +7,16 @@
 #include <SDL2/SDL_image.h>
 #include <stdio.h>
 
-#define nbr_texture 5
+SDL_Surface * textures[MAX_TEXTURE];
+int texture_size = 0;
 
-char arr[nbr_texture][128] = {
-        "res/images/stone.png",
-        "res/images/stone2.png",
-        "res/images/wood.png",
-        "res/images/blue.png",
-        "res/images/flag.png"
-};
-
-SDL_Surface * textures[nbr_texture];
-
-void load_textures(){
-    for(int i = 0; i < nbr_texture; i++){
-        textures[i] = IMG_Load(arr[i]);
-        if(!textures[i]) {
-            printf("IMG_Load: %s\n", IMG_GetError());
-        }
+int load_textures(char * file){
+    textures[texture_size] = IMG_Load(file);
+    if(!textures[texture_size]) {
+        printf("IMG_Load: %s\n", IMG_GetError());
     }
+    texture_size++;
+    return texture_size-1;
 }
 
 ColorRGB get_pixel(int texture_number, int x, int y){

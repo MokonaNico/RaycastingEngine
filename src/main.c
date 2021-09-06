@@ -1,12 +1,9 @@
 #include <SDL2/SDL.h>
-#include <stdio.h>
 #include "DisplayManager.h"
 #include "EventHandler.h"
-#include "Raycasting.h"
 #include "TextureManager.h"
 #include "World.h"
 #include "FontHandler.h"
-
 
 int main(int argc, char* argv[]) {
 
@@ -14,8 +11,13 @@ int main(int argc, char* argv[]) {
     double oldTime = 0;
 
     createDisplay("Raycasting 3D", 1);
+    modifyRenderObject(0,0,0,-1,-1,1);
 
-    load_textures();
+    load_textures("res/images/stone.png");
+    load_textures("res/images/stone2.png");
+    load_textures("res/images/wood.png");
+
+
     load_world("res/maps/map0.map",20,20);
     startFont();
 
