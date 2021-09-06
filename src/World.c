@@ -21,6 +21,14 @@ Vector pos = {1.5,1.5};
 Vector dir = {-1,0};
 Vector plane = {0,0.66};
 
+void setPlayer(double pos_x, double pos_y, double dir_x, double dir_y){
+    pos.x = pos_x;
+    pos.y = pos_y;
+    Vector v = {dir_x, dir_y};
+    dir = normalize(v);
+    plane = multiply(perpendicular(dir),0.66);
+}
+
 void load_world(char * file, int w, int h){
     worldWidth = w;
     worldHeight = h;

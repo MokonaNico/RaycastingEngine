@@ -12,4 +12,10 @@ typedef struct {
 
 Vector rotate(Vector vector, double angle);
 Vector inverse(Vector vector);
+Vector dotProduct(Vector a, Vector b);
+double magnitude(Vector v);
+Vector normalize(Vector v);
+Vector perpendicular(Vector v);
+Vector multiply(Vector v, double m);
+
 #endif //RAYCASTINGENGINE_LINEARALGEBRA_H

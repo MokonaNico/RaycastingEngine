@@ -18,3 +18,36 @@ Vector inverse(Vector vector){
     newVector.y = -vector.y;
     return newVector;
 }
+
+Vector dotProduct(Vector a, Vector b){
+    Vector res;
+    res.x = a.x * b.x;
+    res.y = a.y * b.y;
+    return res;
+}
+
+double magnitude(Vector v){
+    return sqrt(v.x * v.x + v.y * v.y);
+}
+
+Vector normalize(Vector v){
+    double m = magnitude(v);
+    Vector res;
+    res.x = v.x / m;
+    res.y = v.y / m;
+    return res;
+}
+
+Vector perpendicular(Vector v){
+    Vector res;
+    res.x = v.y;
+    res.y = -v.x;
+    return res;
+}
+
+Vector multiply(Vector v, double m){
+    Vector res;
+    res.x = v.x * m;
+    res.y = v.y * m;
+    return res;
+}

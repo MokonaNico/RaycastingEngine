@@ -7,6 +7,7 @@
 
 #include "LinearAlgebra.h"
 
+void setTextures(int floor, int ceiling);
 void floor_ceiling_casting();
 void wall_casting();
 

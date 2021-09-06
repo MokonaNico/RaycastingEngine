@@ -1,9 +1,11 @@
 #include <SDL2/SDL.h>
+#include <stdio.h>
 #include "DisplayManager.h"
 #include "EventHandler.h"
 #include "TextureManager.h"
 #include "World.h"
 #include "FontHandler.h"
+#include "Raycasting.h"
 
 int main(int argc, char* argv[]) {
 
@@ -17,8 +19,14 @@ int main(int argc, char* argv[]) {
     load_textures("res/images/stone2.png");
     load_textures("res/images/wood.png");
 
+    setTextures(1,2);
+
+    setPlayer(1.5,1.5,0.5,0.5);
+
 
     load_world("res/maps/map0.map",20,20);
+
+
     startFont();
 
     while (!quit){

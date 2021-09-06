@@ -8,8 +8,13 @@
 #include "World.h"
 #include "TextureManager.h"
 
-#define ceiling_texture 0
-#define floor_texture 1
+int ceilingTexture = -1;
+int floorTexture = -1;
+
+void setTextures(int floor, int ceiling){
+    ceilingTexture = ceiling;
+    floorTexture = floor;
+}
 
 void floor_ceiling_casting(){
     for(int y = 0; y < HEIGHT; y++)
@@ -43,11 +48,11 @@ void floor_ceiling_casting(){
             ColorRGB color;
 
             // floor
-            color = get_pixel(floor_texture, tx, ty);
+            color = get_pixel(floorTexture, tx, ty);
             setPixel(x,y,color);
 
             //ceiling
-            color = get_pixel(ceiling_texture, tx, ty);
+            color = get_pixel(ceilingTexture, tx, ty);
             setPixel(x, HEIGHT-y-1, color);
         }
     }
