@@ -11,6 +11,7 @@
 #define WIDTH 480 //640
 #define HEIGHT 270 //480
 #define MAX_RENDER_OBJ 32
+#define MAX_FONT 32
 
 typedef struct {
     SDL_Surface * surface;
@@ -27,7 +28,9 @@ void clearRaycastScreen();
 void initRaycastTexture();
 void modifyRenderObject(int index, int x, int y, int w, int h, int isDisplayed);
 int createRenderObjectFromImage(char * file);
+int createRenderObjectFromText(char * text, int font_index, ColorRGB color);
 void getScreenResolution(int * x, int * y);
+int loadFont(char * file, int size);
 
 #endif //RAYCASTINGENGINE_DISPLAYMANAGER_H
 

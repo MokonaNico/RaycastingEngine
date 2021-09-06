@@ -4,7 +4,6 @@
 #include "EventHandler.h"
 #include "TextureManager.h"
 #include "World.h"
-#include "FontHandler.h"
 #include "Raycasting.h"
 
 int main(int argc, char* argv[]) {
@@ -13,21 +12,27 @@ int main(int argc, char* argv[]) {
     double oldTime = 0;
 
     createDisplay("Raycasting 3D", 1);
-    modifyRenderObject(0,0,0,-1,-1,1);
+    loadFont("res/font/ARCADECLASSIC.TTF",22);
+
+    modifyRenderObject(0,200,200,600,600,1);
+
+    int texti = createRenderObjectFromText("Bonjour !", 0, WHITE);
+    int imgi = createRenderObjectFromImage("res/images/blue.png");
+
+    modifyRenderObject(texti,10,0,200,100,1);
+    modifyRenderObject(imgi,0,0,200,100,1);
+
 
     load_textures("res/images/stone.png");
     load_textures("res/images/stone2.png");
     load_textures("res/images/wood.png");
-
     setTextures(1,2);
-
     setPlayer(1.5,1.5,0.5,0.5);
-
-
     load_world("res/maps/map0.map",20,20);
 
 
-    startFont();
+
+
 
     while (!quit){
         oldTime = time;
@@ -40,7 +45,6 @@ int main(int argc, char* argv[]) {
     }
 
     closeDisplay();
-    closeFont();
 
     return 0;
 }
@@ -64,8 +68,9 @@ int main(int argc, char* argv[]) {
 
     TTF_Font *font = TTF_OpenFont("res/font/ARCADECLASSIC.TTF", 200);
 
-    SDL_Surface *stext = TTF_RenderText_Solid(font, "Hello world !", white);
+    SDL_Surface *stext =
     SDL_Texture *text = SDL_CreateTextureFromSurface(renderer, stext);
+
     SDL_Rect trect;
     trect.x = 0;
     trect.y = 0;

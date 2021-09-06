@@ -2,27 +2,17 @@
 // Created by mine- on 28-08-21.
 //
 
-// Menu variable
-/*
-SDL_Surface * menuBackgroundSurface;
-SDL_Texture * menuBackground;
-SDL_Rect menuBackgroundRect = {0,0,WIDTH,HEIGHT};
-*/
-
-
-/*
-
- SDL_GetRendererOutputSize(renderer, &menuBackgroundRect.w, &menuBackgroundRect.h);
- */
-
-
 #include <SDL2/SDL_image.h>
 #include <stdio.h>
+#include <SDL2/SDL_ttf.h>
 #include "DisplayManager.h"
 #include "Raycasting.h"
 
 SDL_Window * window;
 SDL_Renderer * renderer;
+
+TTF_Font * fonts [MAX_FONT];
+int fonts_size = 0;
 
 // Raycast variable
 uint32_t * pixels;
@@ -34,6 +24,8 @@ int tab_size = 0;
  * Create the window and the renderer. It also create the raycast.
  */
 void createDisplay(char * title, int fullScreen){
+    TTF_Init();
+
     // Init window and renderer
     int flags = 0;
     if (fullScreen) flags = SDL_WINDOW_FULLSCREEN_DESKTOP;
@@ -70,12 +62,21 @@ void updateDisplay(){
  * Free everything that as been created in this script
  */
 void closeDisplay(){
+
+
+    for(int i = 0; i < fonts_size; i++){
+        TTF_CloseFont(fonts[i]);
+    }
+    TTF_Quit();
+
+
     free(pixels);
+    printf("%d\n", tab_size);
     for(int i = 0; i < tab_size; i++){
         SDL_DestroyTexture(tab[i].texture);
         if(tab[i].rect != NULL) free(tab[i].rect);
-        if(tab[i].surface != NULL) free(tab[i].surface);
     }
+
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
@@ -163,6 +164,20 @@ int createRenderObjectFromImage(char * file){
     return index;
 }
 
+int createRenderObjectFromText(char * text, int font_index, ColorRGB color){
+    SDL_Color sdlColor = {0,0,0};
+    sdlColor.r = color.r; sdlColor.g = color.g; sdlColor.b = color.b; sdlColor.a = 255;
+    int index = tab_size;
+    RenderObject renderObject;
+    printf("%d",fonts_size);
+    renderObject.surface = TTF_RenderText_Solid(fonts[font_index], text, sdlColor);
+    renderObject.texture = SDL_CreateTextureFromSurface(renderer, renderObject.surface);
+    renderObject.rect = NULL;
+    renderObject.isDisplayed = 0;
+    addRenderObject(renderObject);
+    return index;
+}
+
 /**
  * Get the screen resolution of the renderer
  * @param x a pointer to get the x size
@@ -170,4 +185,11 @@ int createRenderObjectFromImage(char * file){
  */
 void getScreenResolution(int * x, int * y){
     SDL_GetRendererOutputSize(renderer,x,y);
+}
+
+int loadFont(char * file, int size){
+    fonts[fonts_size] = TTF_OpenFont(file, size);
+    int index = fonts_size;
+    fonts_size++;
+    return index;
 }

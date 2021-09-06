@@ -23,7 +23,7 @@ set(PROJECT_FILES src/main.c
         src/Raycasting.c src/Raycasting.h
         src/World.c src/World.h
         src/LinearAlgebra.c src/LinearAlgebra.h
-        src/TextureManager.c src/TextureManager.h src/FontHandler.c src/FontHandler.h)
+        src/TextureManager.c src/TextureManager.h)
 
 include_directories(${SDL_INCLUDE})
 add_executable(RaycastingEngine ${PROJECT_FILES})
