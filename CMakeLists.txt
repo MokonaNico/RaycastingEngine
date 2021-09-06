@@ -23,9 +23,9 @@ set(PROJECT_FILES src/main.c
         src/Raycasting.c src/Raycasting.h
         src/World.c src/World.h
         src/LinearAlgebra.c src/LinearAlgebra.h
-        src/TextureManager.c src/TextureManager.h)
+        src/TextureManager.c src/TextureManager.h src/FontHandler.c src/FontHandler.h)
 
 include_directories(${SDL_INCLUDE})
 add_executable(RaycastingEngine ${PROJECT_FILES})
-target_link_libraries(RaycastingEngine -I${SDL_INCLUDE} -L${SDL_LIB} -Wall -lmingw32 -mconsole
-        -lSDL2main -lSDL2 -lSDL2_image)
+target_link_libraries(RaycastingEngine -L${SDL_LIB} -Wall -lmingw32 -mconsole
+        -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf)

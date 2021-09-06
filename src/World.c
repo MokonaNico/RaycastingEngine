@@ -34,7 +34,7 @@ void load_world(char * file, int w, int h){
     for(int y = 0; y < h; y++){
         for(int x = 0; x < w+1; x++){
             c = fgetc(in_file);
-            if(c != '\n' && c != -1) {
+            if(c != '\n' && c != EOF) {
                 worldMap[x + y * w] = c - 48;
             }
         }
