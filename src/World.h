@@ -10,8 +10,8 @@
 Vector pos;
 Vector dir;
 Vector plane;
-int get_world_case(int x, int y);
-void load_world(char * file, int w, int h);
+int getWorldCase(int x, int y);
+void loadWorld(char * file, int w, int h);
 void setPlayer(double pos_x, double pos_y, double dir_x, double dir_y);
 void setPlayerSpeed(double _mov, double _rot);
 

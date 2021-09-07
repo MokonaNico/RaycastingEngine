@@ -10,7 +10,7 @@
 SDL_Surface * textures[MAX_TEXTURE];
 int texture_size = 0;
 
-int load_textures(char * file){
+int loadTextures(char * file){
     textures[texture_size] = IMG_Load(file);
     if(!textures[texture_size]) {
         printf("IMG_Load: %s\n", IMG_GetError());
@@ -19,7 +19,7 @@ int load_textures(char * file){
     return texture_size-1;
 }
 
-ColorRGB get_pixel(int texture_number, int x, int y){
+ColorRGB getPixel(int texture_number, int x, int y){
     SDL_Surface * surface = textures[texture_number];
     Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * 1;
     Uint8 r,g,b;

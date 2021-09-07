@@ -10,7 +10,7 @@
 #define TEX_SIZE 64
 #define MAX_TEXTURE 32
 
-int load_textures(char * file);
-ColorRGB get_pixel(int texture_number, int x, int y);
+int loadTextures(char * file);
+ColorRGB getPixel(int texture_number, int x, int y);
 
 #endif //RAYCASTINGENGINE_TEXTUREMANAGER_H

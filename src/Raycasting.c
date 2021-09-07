@@ -16,7 +16,7 @@ void setTextures(int floor, int ceiling){
     floorTexture = floor;
 }
 
-void floor_ceiling_casting(){
+void floorCeilingCasting(){
     for(int y = 0; y < HEIGHT; y++)
     {
         double rayDirX0 = dir.x - plane.x;
@@ -48,17 +48,17 @@ void floor_ceiling_casting(){
             ColorRGB color;
 
             // floor
-            color = get_pixel(floorTexture, tx, ty);
+            color = getPixel(floorTexture, tx, ty);
             setPixel(x,y,color);
 
             //ceiling
-            color = get_pixel(ceilingTexture, tx, ty);
+            color = getPixel(ceilingTexture, tx, ty);
             setPixel(x, HEIGHT-y-1, color);
         }
     }
 }
 
-void wall_casting(){
+void wallCasting(){
     for(int x = 0; x < WIDTH; x++){
         double cameraX = 2 * x / (double)WIDTH - 1;
         double rayDirX = dir.x + plane.x * cameraX;
@@ -116,7 +116,7 @@ void wall_casting(){
                 mapY += stepY;
                 side = 1;
             }
-            if (get_world_case(mapX,mapY) > 0) hit = 1;
+            if (getWorldCase(mapX, mapY) > 0) hit = 1;
         }
 
         if (side == 0) perpWallDist = (mapX - pos.x + (1.0 - stepX) / 2) / rayDirX;
@@ -129,7 +129,7 @@ void wall_casting(){
         int drawEnd = lineHeight / 2 + HEIGHT / 2;
         if(drawEnd >= HEIGHT)drawEnd = HEIGHT - 1;
 
-        int texNum = get_world_case(mapX,mapY) - 1;
+        int texNum = getWorldCase(mapX, mapY) - 1;
 
         double wallX;
         if (side == 0) wallX = pos.y + perpWallDist * rayDirY;
@@ -146,7 +146,7 @@ void wall_casting(){
         {
             int texY = (int)texPos & (TEX_SIZE - 1);
             texPos += step;
-            ColorRGB color = get_pixel(texNum, texX, texY);
+            ColorRGB color = getPixel(texNum, texX, texY);
             if(side == 1) color = divide(color);
             setPixel(x,y,color);
         }

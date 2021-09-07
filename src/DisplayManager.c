@@ -43,8 +43,8 @@ void updateDisplay(){
 
     // If the raycast render is enable, we update the texture.
     if(tab[0].isDisplayed){
-        floor_ceiling_casting();
-        wall_casting();
+        floorCeilingCasting();
+        wallCasting();
         SDL_UpdateTexture(tab[0].texture, NULL, pixels, WIDTH * sizeof(uint32_t));
     }
 

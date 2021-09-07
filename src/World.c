@@ -34,7 +34,7 @@ void setPlayerSpeed(double _mov, double _rot){
     rotationSpeed = _rot;
 }
 
-void load_world(char * file, int w, int h){
+void loadWorld(char * file, int w, int h){
     worldWidth = w;
     worldHeight = h;
     FILE *in_file = fopen(file, "r");
@@ -56,13 +56,13 @@ void load_world(char * file, int w, int h){
     fclose(in_file);
 }
 
-int get_world_case(int x, int y){
+int getWorldCase(int x, int y){
     return worldMap[x + y * worldWidth];
 }
 
 void moveInADirection(Vector _dir, double move){
-    if(get_world_case((int)(pos.x + _dir.x * move), (int)pos.y) == 0) pos.x += _dir.x * move;
-    if(get_world_case((int)pos.x, (int)(pos.y+_dir.y*move)) == 0) pos.y += _dir.y * move;
+    if(getWorldCase((int) (pos.x + _dir.x * move), (int) pos.y) == 0) pos.x += _dir.x * move;
+    if(getWorldCase((int) pos.x, (int) (pos.y + _dir.y * move)) == 0) pos.y += _dir.y * move;
 }
 
 void doMovements(double t){

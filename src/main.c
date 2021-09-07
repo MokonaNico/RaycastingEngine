@@ -20,12 +20,12 @@ int main(int argc, char* argv[]) {
     modifyRenderObject(texti,10,0,200,100,1);
     modifyRenderObject(imgi,0,0,200,100,1);
 
-    load_textures("res/images/stone.png");
-    load_textures("res/images/stone2.png");
-    load_textures("res/images/wood.png");
+    loadTextures("res/images/stone.png");
+    loadTextures("res/images/stone2.png");
+    loadTextures("res/images/wood.png");
     setTextures(1,2);
     setPlayer(1.5,1.5,0.5,0.5);
-    load_world("res/maps/map0.map",20,20);
+    loadWorld("res/maps/map0.map", 20, 20);
 
     while (!quit){
         oldTime = time;
