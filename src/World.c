@@ -29,6 +29,11 @@ void setPlayer(double pos_x, double pos_y, double dir_x, double dir_y){
     plane = multiply(perpendicular(dir),0.66);
 }
 
+void setPlayerSpeed(double _mov, double _rot){
+    movementSpeed = _mov;
+    rotationSpeed = _rot;
+}
+
 void load_world(char * file, int w, int h){
     worldWidth = w;
     worldHeight = h;

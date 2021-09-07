@@ -7,21 +7,18 @@
 #include "Raycasting.h"
 
 int main(int argc, char* argv[]) {
-
     double time = 0;
     double oldTime = 0;
 
     createDisplay("Raycasting 3D", 1);
     loadFont("res/font/ARCADECLASSIC.TTF",22);
 
-    modifyRenderObject(0,200,200,600,600,1);
-
     int texti = createRenderObjectFromText("Bonjour !", 0, WHITE);
     int imgi = createRenderObjectFromImage("res/images/blue.png");
 
+    modifyRenderObject(0,200,200,600,600,1);
     modifyRenderObject(texti,10,0,200,100,1);
     modifyRenderObject(imgi,0,0,200,100,1);
-
 
     load_textures("res/images/stone.png");
     load_textures("res/images/stone2.png");
@@ -29,10 +26,6 @@ int main(int argc, char* argv[]) {
     setTextures(1,2);
     setPlayer(1.5,1.5,0.5,0.5);
     load_world("res/maps/map0.map",20,20);
-
-
-
-
 
     while (!quit){
         oldTime = time;
@@ -48,62 +41,3 @@ int main(int argc, char* argv[]) {
 
     return 0;
 }
-
-
-
-/*
-int main(int argc, char* argv[]) {
-    SDL_Init(SDL_INIT_VIDEO);
-    TTF_Init();
-
-    SDL_Event event;
-    SDL_Color white = {255, 255, 255};
-    int continuer = 1;
-
-    SDL_Window * window = SDL_CreateWindow("Test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,500, 500, 0);
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1,SDL_RENDERER_ACCELERATED);
-
-    SDL_Surface *sfond = IMG_Load("res/images/blue.png");
-    SDL_Texture *fond = SDL_CreateTextureFromSurface(renderer, sfond);
-
-    TTF_Font *font = TTF_OpenFont("res/font/ARCADECLASSIC.TTF", 200);
-
-    SDL_Surface *stext =
-    SDL_Texture *text = SDL_CreateTextureFromSurface(renderer, stext);
-
-    SDL_Rect trect;
-    trect.x = 0;
-    trect.y = 0;
-    trect.w = 400;
-    trect.h = 100;
-
-
-    while (continuer){
-        SDL_WaitEvent(&event);
-        switch(event.type)
-        {
-            case SDL_QUIT:
-                continuer = 0;
-                break;
-        }
-
-
-
-        SDL_RenderClear(renderer);
-        SDL_RenderCopy(renderer, fond, NULL, NULL);
-        SDL_RenderCopy(renderer, text, NULL, &trect);
-        SDL_RenderPresent(renderer);
-    }
-
-
-    SDL_FreeSurface(stext);
-    SDL_DestroyTexture(text);
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-
-    TTF_CloseFont(font);
-    TTF_Quit();
-    SDL_Quit();
-    return 0;
-}
- */
