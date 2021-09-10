@@ -52,7 +52,6 @@ void loadWorld(char * file, int w, int h){
             }
         }
     }
-
     fclose(in_file);
 }
 
@@ -92,3 +91,8 @@ void doMovements(double t){
     }
 }
 
+void setWord(int * world, int w, int h){
+    worldWidth = w;
+    worldHeight = h;
+    worldMap = world;
+}

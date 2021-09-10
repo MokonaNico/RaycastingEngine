@@ -16,14 +16,14 @@ set(SDL_LIB "C:/Libraries/SDL/lib")
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/res DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 file(COPY ${SDL_DLL} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
-set(PROJECT_FILES src/main.c
+set(PROJECT_FILES
         src/DisplayManager.c src/DisplayManager.h
         src/EventHandler.c src/EventHandler.h
         src/Color.h src/Color.c
         src/Raycasting.c src/Raycasting.h
         src/World.c src/World.h
         src/LinearAlgebra.c src/LinearAlgebra.h
-        src/TextureManager.c src/TextureManager.h)
+        src/TextureManager.c src/TextureManager.h src/Maze/main.c src/Maze/main.h)
 
 include_directories(${SDL_INCLUDE})
 add_executable(RaycastingEngine ${PROJECT_FILES})

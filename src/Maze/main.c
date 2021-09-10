@@ -1,24 +1,23 @@
+//
+// Created by mine- on 09-09-21.
+//
+
+#include "main.h"
 #include <SDL2/SDL.h>
 #include <stdio.h>
-#include "DisplayManager.h"
-#include "EventHandler.h"
-#include "TextureManager.h"
-#include "World.h"
-#include "Raycasting.h"
+#include "../DisplayManager.h"
+#include "../EventHandler.h"
+#include "../TextureManager.h"
+#include "../World.h"
+#include "../Raycasting.h"
 
 int main(int argc, char* argv[]) {
     double time = 0;
     double oldTime = 0;
 
-    createDisplay("Raycasting 3D", 1);
-    loadFont("res/font/ARCADECLASSIC.TTF",22);
+    createDisplay("Maze Game", 1);
 
-    int texti = createRenderObjectFromText("Bonjour !", 0, WHITE);
-    int imgi = createRenderObjectFromImage("res/images/blue.png");
-
-    modifyRenderObject(0,200,200,600,600,1);
-    modifyRenderObject(texti,10,0,200,100,1);
-    modifyRenderObject(imgi,0,0,200,100,1);
+    modifyRenderObject(0,0,0,-1,-1,1);
 
     loadTextures("res/images/stone.png");
     loadTextures("res/images/stone2.png");
