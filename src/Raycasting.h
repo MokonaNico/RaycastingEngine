@@ -10,5 +10,6 @@
 void setTextures(int floor, int ceiling);
 void floorCeilingCasting();
 void wallCasting();
+void spriteCasting();
 
 #endif //RAYCASTINGENGINE_RAYCASTING_H

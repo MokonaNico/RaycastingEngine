@@ -14,6 +14,7 @@ int * worldMap;
 int worldWidth;
 int worldHeight;
 
+
 double movementSpeed = 5.0;
 double rotationSpeed = 3.0;
 
@@ -55,6 +56,10 @@ void loadWorld(char * file, int w, int h){
     fclose(in_file);
 }
 
+void closeWorld(){
+    free(worldMap);
+}
+
 int getWorldCase(int x, int y){
     return worldMap[x + y * worldWidth];
 }
@@ -91,8 +96,15 @@ void doMovements(double t){
     }
 }
 
-void setWord(int * world, int w, int h){
+void setWorld(int * world, int w, int h){
     worldWidth = w;
     worldHeight = h;
     worldMap = world;
+}
+
+void addSprite(double _x, double _y, int _texture){
+    Vector v = {_x,_y};
+    Sprite s = {v,_texture};
+    sprites[sprite_length] = s;
+    sprite_length++;
 }

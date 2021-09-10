@@ -45,6 +45,7 @@ void updateDisplay(){
     if(tab[0].isDisplayed){
         floorCeilingCasting();
         wallCasting();
+        spriteCasting();
         SDL_UpdateTexture(tab[0].texture, NULL, pixels, WIDTH * sizeof(uint32_t));
     }
 

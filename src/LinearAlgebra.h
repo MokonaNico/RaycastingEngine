@@ -17,5 +17,6 @@ double magnitude(Vector v);
 Vector normalize(Vector v);
 Vector perpendicular(Vector v);
 Vector multiply(Vector v, double m);
+double dist(Vector a, Vector b);
 
 #endif //RAYCASTINGENGINE_LINEARALGEBRA_H

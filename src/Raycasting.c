@@ -11,6 +11,12 @@
 int ceilingTexture = -1;
 int floorTexture = -1;
 
+double ZBuffer[WIDTH];
+
+int spriteOrder[MAX_SPRITE];
+double spriteDistance[MAX_SPRITE];
+
+
 void setTextures(int floor, int ceiling){
     ceilingTexture = ceiling;
     floorTexture = floor;
@@ -149,6 +155,71 @@ void wallCasting(){
             ColorRGB color = getPixel(texNum, texX, texY);
             if(side == 1) color = divide(color);
             setPixel(x,y,color);
+        }
+        ZBuffer[x] = perpWallDist;
+    }
+}
+
+void sortSprite(int* order, const double* dist){
+    int swap = 0;
+    do{
+        swap = 0;
+        for(int i = 1; i < sprite_length;i++){
+            if(dist[order[i-1]] < dist[order[i]]){
+                int a = order[i];
+                order[i] = order[i-1];
+                order[i-1] = a;
+                swap = 1;
+            }
+        }
+    } while (swap);
+}
+
+void spriteCasting(){
+    for(int i = 0; i < sprite_length; i++){
+        spriteOrder[i] = i;
+        spriteDistance[i] = dist(pos, sprites[i].pos);
+    }
+
+    sortSprite(spriteOrder, spriteDistance);
+
+    for(int i = 0; i < sprite_length; i++){
+        Vector sprite;
+        sprite.x = sprites[spriteOrder[i]].pos.x - pos.x;
+        sprite.y = sprites[spriteOrder[i]].pos.y - pos.y;
+
+        double invDet = 1.0 / (plane.x * dir.y - dir.x * plane.y);
+        Vector transform;
+        transform.x = invDet * (dir.y * sprite.x - dir.x * sprite.y);
+        transform.y = invDet * (-plane.y * sprite.x + plane.x * sprite.y);
+
+        int spriteScreenX = (int) ((WIDTH/2.0) * (1 + transform.x / transform.y));
+
+        int spriteHeight = abs((int) (HEIGHT / (transform.y)));
+        int drawStartY = -spriteHeight / 2 + HEIGHT / 2;
+        if(drawStartY < 0) drawStartY = 0;
+        int drawEndY = spriteHeight / 2 + HEIGHT / 2;
+        if(drawEndY >= HEIGHT) drawEndY = HEIGHT - 1;
+
+        int spriteWidth = abs( (int) (HEIGHT / (transform.y)));
+        int drawStartX = -spriteWidth / 2 + spriteScreenX;
+        if(drawStartX < 0) drawStartX = 0;
+        int drawEndX = spriteWidth / 2 + spriteScreenX;
+        if(drawEndX >= WIDTH) drawEndX = WIDTH - 1;
+
+        for(int stripe = drawStartX; stripe < drawEndX; stripe++) {
+            int texX = (int) (256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * TEX_SIZE / spriteWidth) / 256;
+            if(transform.y > 0 && stripe > 0 && stripe < WIDTH && transform.y < ZBuffer[stripe]){
+                for(int y = drawStartY; y < drawEndY; y++) {
+                    int d = (y) * 256 - HEIGHT * 128 + spriteHeight * 128;
+                    int texY = ((d * TEX_SIZE) / spriteHeight) / 256;
+
+                    ColorRGB color = getPixel(sprites[spriteOrder[i]].texture, texX, texY);
+                    if(!(color.r == 0 && color.g == 0 && color.b == 0)){
+                        setPixel(stripe, y, color);
+                    }
+                }
+            }
         }
     }
 }

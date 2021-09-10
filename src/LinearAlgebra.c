@@ -51,3 +51,9 @@ Vector multiply(Vector v, double m){
     res.y = v.y * m;
     return res;
 }
+
+double dist(Vector a, Vector b){
+    double dx = a.x - b.x;
+    double dy = a.y - b.y;
+    return dx*dx + dy*dy;
+}
