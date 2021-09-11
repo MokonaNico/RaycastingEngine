@@ -2,9 +2,7 @@
 // Created by mine- on 09-09-21.
 //
 
-#include "main.h"
 #include <SDL2/SDL.h>
-#include <stdio.h>
 #include "../DisplayManager.h"
 #include "../EventHandler.h"
 #include "../TextureManager.h"
@@ -23,15 +21,17 @@ int main(int argc, char* argv[]) {
     loadTextures("res/images/wood.png");
     loadTextures("res/images/barrel.png");
     loadTextures("res/images/lamp.png");
+
     setTextures(1,2);
     setPlayer(1.5,1.5,0,1);
-    loadWorld("res/maps/map0.map",20,20);
 
-    addSprite(16.5,1.5, 3);
-    addSprite(16.5,2.5, 3);
-    addSprite(16.5,4.5, 3);
-    addSprite(16.5,5.5, 3);
-    addSprite(16.5,6.5, 3);
+    int maze_w = 51;
+    int maze_h = 51;
+    int * maze;
+    maze = malloc(sizeof(int) * maze_w * maze_h);
+    RandomDepthFirstSearch(maze, maze_w, maze_h);
+
+    setWorld(maze, maze_w, maze_h);
 
     while (!quit){
         oldTime = time;

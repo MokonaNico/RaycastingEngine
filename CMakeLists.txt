@@ -23,7 +23,7 @@ set(PROJECT_FILES
         src/Raycasting.c src/Raycasting.h
         src/World.c src/World.h
         src/LinearAlgebra.c src/LinearAlgebra.h
-        src/TextureManager.c src/TextureManager.h src/Maze/main.c src/Maze/main.h)
+        src/TextureManager.c src/TextureManager.h src/Maze/main.c src/Maze/MazeGenerator.c src/Maze/MazeGenerator.h)
 
 include_directories(${SDL_INCLUDE})
 add_executable(RaycastingEngine ${PROJECT_FILES})

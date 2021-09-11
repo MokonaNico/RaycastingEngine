@@ -7,7 +7,7 @@
 
 #include "LinearAlgebra.h"
 
-#define MAX_SPRITE 32
+#define MAX_SPRITE 128
 
 typedef struct {
     Vector pos;

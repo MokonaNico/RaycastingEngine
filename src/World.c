@@ -65,8 +65,8 @@ int getWorldCase(int x, int y){
 }
 
 void moveInADirection(Vector _dir, double move){
-    if(getWorldCase((int) (pos.x + _dir.x * move), (int) pos.y) == 0) pos.x += _dir.x * move;
-    if(getWorldCase((int) pos.x, (int) (pos.y + _dir.y * move)) == 0) pos.y += _dir.y * move;
+    if(getWorldCase((int) (pos.x + _dir.x * move), (int) pos.y) <= 0) pos.x += _dir.x * move;
+    if(getWorldCase((int) pos.x, (int) (pos.y + _dir.y * move)) <= 0) pos.y += _dir.y * move;
 }
 
 void doMovements(double t){

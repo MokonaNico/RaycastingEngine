@@ -1,8 +1,0 @@
-//
-// Created by mine- on 09-09-21.
-//
-
-#ifndef RAYCASTINGENGINE_MAIN_H
-#define RAYCASTINGENGINE_MAIN_H
-
-#endif //RAYCASTINGENGINE_MAIN_H
