@@ -27,4 +27,5 @@ void setPlayerSpeed(double _mov, double _rot);
 void addSprite(double _x, double _y, int _texture);
 void closeWorld();
 void setWorld(int * world, int w, int h);
+void modifySprite(int index, double _x, double _y);
 #endif //RAYCASTINGENGINE_WORLD_H

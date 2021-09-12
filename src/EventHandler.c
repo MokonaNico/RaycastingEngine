@@ -12,6 +12,8 @@
 #define strafe_right_button SDLK_e
 
 
+
+
 SDL_Event event;
 int quit = 0;
 
@@ -21,6 +23,12 @@ int left_pressed = 0;
 int right_pressed = 0;
 int strafe_left_pressed = 0;
 int strafe_right_pressed = 0;
+
+int one_pressed = 0;
+int two_pressed = 0;
+int three_pressed = 0;
+
+int enter_pressed = 0;
 
 void keyDown(){
     switch( event.key.keysym.sym){
@@ -45,6 +53,18 @@ void keyDown(){
         case strafe_right_button:
             strafe_right_pressed = 1;
             break;
+        case SDLK_1:
+            one_pressed = 1;
+            break;
+        case SDLK_2:
+            two_pressed = 1;
+            break;
+        case SDLK_3:
+            three_pressed = 1;
+            break;
+        case SDLK_RETURN:
+            enter_pressed = 1;
+            break;
     }
 }
 
@@ -67,6 +87,18 @@ void keyUp(){
             break;
         case strafe_right_button:
             strafe_right_pressed = 0;
+            break;
+        case SDLK_1:
+            one_pressed = 0;
+            break;
+        case SDLK_2:
+            two_pressed = 0;
+            break;
+        case SDLK_3:
+            three_pressed = 0;
+            break;
+        case SDLK_RETURN:
+            enter_pressed = 0;
             break;
 
     }

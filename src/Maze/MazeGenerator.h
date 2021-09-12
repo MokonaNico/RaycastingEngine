@@ -13,5 +13,5 @@ typedef struct {
 void RandomDepthFirstSearch(int * maze, int w, int h);
 void Rec_RandomDepthFirstSearch(int * maze, int w, int h, int x, int y);
 void breakWalls(int * maze, int w, int h, int n);
-
+void printMaze(int * maze, int w, int h);
 #endif //RAYCASTINGENGINE_MAZEGENERATOR_H

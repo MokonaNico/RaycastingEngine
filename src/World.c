@@ -108,3 +108,8 @@ void addSprite(double _x, double _y, int _texture){
     sprites[sprite_length] = s;
     sprite_length++;
 }
+
+void modifySprite(int index, double _x, double _y){
+    sprites[index].pos.x = _x;
+    sprites[index].pos.y = _y;
+}
